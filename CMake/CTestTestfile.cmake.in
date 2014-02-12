@@ -1,0 +1,2 @@
+add_test(LinkChecker "@LINK_CHECKER@" "http://maidsafe.net")
+set_tests_properties(LinkChecker PROPERTIES PASS_REGULAR_EXPRESSION "0 warnings found. 0 errors found.")
