@@ -1,2 +1,2 @@
-add_test(LinkChecker "@LINK_CHECKER@" "--output=text" "--ignore-url=^mailto:" "--no-status" "--check-css" "--check-html" "--file-output=html/maidsafe_links_check.html" "http://maidsafe.net")
+add_test(LinkChecker "@LINK_CHECKER@" "--config=link_checker.config" "http://maidsafe.net")
 set_tests_properties(LinkChecker PROPERTIES PASS_REGULAR_EXPRESSION "0 warnings found. 0 errors found.")
