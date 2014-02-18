@@ -29,6 +29,7 @@ set(CTEST_BUILD_NAME "N.A.")
 
 # Set dirs
 get_filename_component(CTEST_SOURCE_DIRECTORY ./maidsafe.github.io ABSOLUTE)
+get_filename_component(CTEST_SIGMOID_SOURCE_DIRECTORY ./sigmoid-solutions.github.io ABSOLUTE)
 get_filename_component(CTEST_BINARY_DIRECTORY . ABSOLUTE)
 
 # Find Git
@@ -50,11 +51,19 @@ set(CTEST_COMMAND "")
 
 # Clone source if required
 if(NOT EXISTS "${CTEST_SOURCE_DIRECTORY}")
-  message("Cloning repository (this may take a long time).")
+  message("Cloning MaidSafe Website repository (this may take a long time).")
   set(CTEST_CHECKOUT_COMMAND "${CTEST_GIT_COMMAND} clone git@github.com:maidsafe/maidsafe.github.io ${CTEST_SOURCE_DIRECTORY}")
   set(IsFreshlyCloned ON)
 else()
-  message("Updating repository.")
+  message("Updating MaidSafe Website repository.")
+endif()
+
+if(NOT EXISTS "${CTEST_SIGMOID_SOURCE_DIRECTORY}")
+  message("Cloning Sigmoid Website repository (this may take a long time).")
+  set(CTEST_CHECKOUT_COMMAND "${CTEST_GIT_COMMAND} clone git@github.com:sigmoid-solutions/sigmoid-solutions.github.io ${CTEST_SIGMOID_SOURCE_DIRECTORY}")
+  set(IsFreshlyCloned ON)
+else()
+  message("Updating Sigmoid Website repository.")
 endif()
 
 # Configure tests
@@ -74,5 +83,6 @@ ctest_test(RETURN_VALUE Result)
 message("Submitting results.")
 if(NOT ${Result} EQUAL 0)
   ctest_upload(FILES ${CTEST_BINARY_DIRECTORY}/Testing/maidsafe_links_check.html)
+  ctest_upload(FILES ${CTEST_BINARY_DIRECTORY}/Testing/sigmoid_links_check.html)
 endif()
 ctest_submit(RETRY_COUNT 3 RETRY_DELAY 5)
