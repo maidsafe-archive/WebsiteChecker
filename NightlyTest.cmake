@@ -30,6 +30,7 @@ set(CTEST_BUILD_NAME "N.A.")
 # Set dirs
 get_filename_component(CTEST_SOURCE_DIRECTORY ./maidsafe.github.io ABSOLUTE)
 get_filename_component(CTEST_SIGMOID_SOURCE_DIRECTORY ./sigmoid-solutions.github.io ABSOLUTE)
+get_filename_component(CTEST_SAFECOIN_SOURCE_DIRECTORY ./safecoin-web.github.io ABSOLUTE)
 get_filename_component(CTEST_BINARY_DIRECTORY . ABSOLUTE)
 
 # Find Git
@@ -66,6 +67,14 @@ else()
   message("Updating Sigmoid Website repository.")
 endif()
 
+if(NOT EXISTS "${CTEST_SAFECOIN_SOURCE_DIRECTORY}")
+  message("Cloning Safecoin Website repository (this may take a long time).")
+  set(CTEST_CHECKOUT_COMMAND "${CTEST_GIT_COMMAND} clone git@github.com:safecoin-web/safecoin-web.github.io ${CTEST_SOURCE_DIRECTORY}")
+  set(IsFreshlyCloned ON)
+else()
+  message("Updating Safecoin Website repository.")
+endif()
+
 # Configure tests
 configure_file(CMake/CTestTestfile.cmake.in CTestTestfile.cmake @ONLY)
 ctest_start(Continuous TRACK Continuous)
@@ -75,5 +84,5 @@ ctest_update(RETURN_VALUE UpdatedCount)
 message("Running tests.")
 ctest_test(RETURN_VALUE Result)
 message("Submitting results.")
-  ctest_upload(FILES ${CTEST_BINARY_DIRECTORY}/Testing/maidsafe_links_check.html ${CTEST_BINARY_DIRECTORY}/Testing/sigmoid_links_check.html)
+  ctest_upload(FILES ${CTEST_BINARY_DIRECTORY}/Testing/maidsafe_links_check.html ${CTEST_BINARY_DIRECTORY}/Testing/sigmoid_links_check.html ${CTEST_BINARY_DIRECTORY}/Testing/safecoin_links_check.html)
 ctest_submit(RETRY_COUNT 3 RETRY_DELAY 5)
