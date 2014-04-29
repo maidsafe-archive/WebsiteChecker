@@ -1,6 +1,2 @@
-add_test(LinkChecker "@LINK_CHECKER@" "--config=link_checker.config" "http://maidsafe.net")
-set_tests_properties(LinkChecker PROPERTIES PASS_REGULAR_EXPRESSION "0 warnings found. 0 errors found.")
-add_test(LinkChecker "@LINK_CHECKER@" "--config=link_checker_sigmoid.config" "http://www.sigmoidsolutions.com/")
-set_tests_properties(LinkChecker PROPERTIES PASS_REGULAR_EXPRESSION "0 warnings found. 0 errors found.")
-add_test(LinkChecker "@LINK_CHECKER@" "--config=link_checker_safecoin.config" "http://www.safecoin.io/")
+add_test(LinkChecker "@LINK_CHECKER@" "--config=Websites/@Website@/link_checker.config" "--file-output=html/Testing/@WebsiteLowerCase@_links_check.html" "@WebsiteURL@")
 set_tests_properties(LinkChecker PROPERTIES PASS_REGULAR_EXPRESSION "0 warnings found. 0 errors found.")
