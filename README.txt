@@ -1,3 +1,10 @@
+# ***This repository is no longer maintained***
+# It has been moved to the maidsafe-archive organisation for reference only
+#
+#
+#
+#
+
 To run tests, first install LinkChecker (http://wummel.github.io/linkchecker).
 Then clone this repository, cd into its root and run:
 
